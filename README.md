@@ -1,1 +1,1 @@
-C - Hello, World project
+Low level programming project
