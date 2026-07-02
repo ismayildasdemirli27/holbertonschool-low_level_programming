@@ -1,10 +1,8 @@
 #include "main.h"
 
 /**
- * _puts_recursion - bir sətri çap edir və ardınca yeni sətir qoyur.
- * @s: çap olunacaq sətirə göstərici (pointer).
- *
- * Return: void
+ * _puts_recursion - Prints a string, followed by a new line.
+ * @s: The string to be printed.
  */
 void _puts_recursion(char *s)
 {
