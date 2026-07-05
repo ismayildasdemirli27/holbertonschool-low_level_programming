@@ -9,3 +9,4 @@ void _puts(char *str);
 
 #endif
 void print_rev(char *s);
+void rev_string(char *s);
