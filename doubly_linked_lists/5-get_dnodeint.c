@@ -11,16 +11,14 @@ dlistint_t *get_dnodeint_at_index(dlistint_t *head, unsigned int index)
 {
 	unsigned int count = 0;
 
-	/* Liste sonuna gelene kadar veya istenen indeksi bulana kadar ilerle */
 	while (head != NULL)
 	{
 		if (count == index)
 			return (head);
-		
+
 		head = head->next;
 		count++;
 	}
 
-	/* İstenen indeks listede yoksa NULL döndür */
 	return (NULL);
 }
