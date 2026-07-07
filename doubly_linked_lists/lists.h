@@ -18,7 +18,13 @@ typedef struct dlistint_s
 	struct dlistint_s *next;
 } dlistint_t;
 
+/* Task 0: Print list */
 size_t print_dlistint(const dlistint_t *h);
+
+/* Task 1: List length */
 size_t dlistint_len(const dlistint_t *h);
+
+/* Task 2: Add node */
+dlistint_t *add_dnodeint(dlistint_t **head, const int n);
 
 #endif /* LISTS_H */
