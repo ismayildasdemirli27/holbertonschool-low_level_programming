@@ -12,53 +12,40 @@
  */
 int hash_table_set(hash_table_t *ht, const char *key, const char *value)
 {
-	hash_node_t *new_node, *tmp;
-	unsigned long int index;
+	hash_node_t *new;
 	char *value_copy;
+	unsigned long int index;
 
-	/* Giriş parametrələrinin yoxlanılması */
 	if (ht == NULL || key == NULL || *key == '\0' || value == NULL)
 		return (0);
-
 	value_copy = strdup(value);
 	if (value_copy == NULL)
 		return (0);
-
 	index = key_index((const unsigned char *)key, ht->size);
-	tmp = ht->array[index];
-
-	/* Açar artıq mövcuddursa, sadəcə dəyərini (value) yenilə */
-	while (tmp != NULL)
+	for (new = ht->array[index]; new != NULL; new = new->next)
 	{
-		if (strcmp(tmp->key, key) == 0)
+		if (strcmp(new->key, key) == 0)
 		{
-			free(tmp->value);
-			tmp->value = value_copy;
+			free(new->value);
+			new->value = value_copy;
 			return (1);
 		}
-		tmp = tmp->next;
 	}
-
-	/* Yeni düyünün (node) yaradılması */
-	new_node = malloc(sizeof(hash_node_t));
-	if (new_node == NULL)
+	new = malloc(sizeof(hash_node_t));
+	if (new == NULL)
 	{
 		free(value_copy);
 		return (0);
 	}
-
-	new_node->key = strdup(key);
-	if (new_node->key == NULL)
+	new->key = strdup(key);
+	if (new->key == NULL)
 	{
-		free(new_node);
+		free(new);
 		free(value_copy);
 		return (0);
 	}
-	
-	/* Toqquşma hallarında elementi siyahının əvvəlinə əlavə edirik */
-	new_node->value = value_copy;
-	new_node->next = ht->array[index];
-	ht->array[index] = new_node;
-
+	new->value = value_copy;
+	new->next = ht->array[index];
+	ht->array[index] = new;
 	return (1);
 }
